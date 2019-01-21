@@ -26,6 +26,7 @@ class Blockchain:
     
     Attr:
         chain - list containing blocks in the blockchain
+        transactions - list of transactions completed
     """
     
     def __init__(self):
@@ -35,6 +36,7 @@ class Blockchain:
         :return: None
         """
         self.chain = []
+        self.transactions = []
         self.create_block(proof = 1, previous_hash = '0')
    
      
@@ -49,7 +51,9 @@ class Blockchain:
         block = {'index': len(self.chain) + 1,
                  'timestamp': str(datetime.datetime.now()),
                  'proof': proof,
-                 'previous_hash': previous_hash}
+                 'previous_hash': previous_hash,
+                 'transactions': self.transactions}
+        self.transactions = []
         self.chain.append(block)
         return block
     
