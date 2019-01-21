@@ -127,6 +127,22 @@ class Blockchain:
             block_index += 1
             
         return True
+    
+    def add_transaction(self, sender, receiver, amount):
+        """
+        Add transaction to the end of the list
+        
+        :param sender: person who is sending RT
+        :param receiver: person who is receiving RT
+        :param amount: amount of RT being transferred
+        :return: int, index of the added block on the transactions list
+        """
+        self.transactions.append({'sender': sender,
+                                  'receiver': receiver,
+                                  'amount': amount})
+            
+        previous_block = self.get_previous_block()
+        return previous_block['index'] + 1
             
 # Part 2 - Mining our Blockchain
 # Creating a Flask-based Web App
