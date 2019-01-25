@@ -27,7 +27,7 @@ class Blockchain:
     Attr:
         chain - list containing blocks in the blockchain
         transactions - list of transactions completed
-        nodes - list of nodes in blockchain
+        nodes - list of nodes in network
     """
     
     def __init__(self):
@@ -150,10 +150,38 @@ class Blockchain:
         """
         Add node with address to nodes list
         
-        :param address: 
+        :param address: url address to extract
         """
         parsed_url = urlparse(address)  # Use urlib.parse import to parse given url
         self.nodes.add{parsed_url.netloc}  
+        
+    def replace_chain(self):
+        """
+        Replace the current "main" chain.
+        """
+        network = self.nodes 
+        longest_chain = None
+        max_length = len(self.chain)
+        
+        # Find length of nodes and compare with current length
+        for node in network:
+            # Take advantage of get_chain method below
+            response = requests.get(f'http://{node}/get_chain')
+            
+            # IF response succeeded, get length and replace current chain if node's chain is longer
+            if response.status_code == 200:
+                length = response.json()['length']
+                chain = response.json()['chain']
+                if length > max_length and self.is_chain_valid(chain):
+                    max_length = length
+                    longest_chain = chain
+                    
+        if longest_chain:
+            self.chain = longest_chain
+            return True
+            
+            
+            
             
 # Part 2 - Mining our Blockchain
 # Creating a Flask-based Web App
