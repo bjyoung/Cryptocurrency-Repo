@@ -187,6 +187,10 @@ class Blockchain:
 # Creating a Flask-based Web App
 # For more Flask info, search for "Flask quickstart"
 app = Flask(__name__)
+
+# Creating an address for the node on Port 5000
+# Use uuid import here
+node_address = str(uuid4()).replace('-', '')
     
 # Creating a Blockchain instance
 blockchain = Blockchain()
