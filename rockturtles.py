@@ -209,7 +209,8 @@ def mine_block():
     previous_block = blockchain.get_previous_block()
     previous_proof = previous_block['proof']
     proof = blockchain.proof_of_work(previous_proof)
-    previous_hash = blockchain.hash(previous_block) #Error
+    previous_hash = blockchain.hash(previous_block) #Error (fixed)
+    blockchain.add_transaction(sender = node_address, receiver = 'Brandon', amount = 1)
     
     # Create new block
     block = blockchain.create_block(proof, previous_hash)
@@ -219,7 +220,8 @@ def mine_block():
                 'index': block['index'],
                 'timestamp': block['timestamp'],
                 'proof': block['proof'],
-                'previous_hash': block['previous_hash']}
+                'previous_hash': block['previous_hash'],
+                'transactions': block['transactions']}
     
     # 200 represents a successful HTTP response
     return jsonify(response), 200
