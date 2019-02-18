@@ -263,6 +263,9 @@ def is_valid():
 # Adding a new transaction to the Blockchain
 @app.route('/add_transaction', methods = ['POST'])
 def add_transaction():
+    """
+    Adding a new transaction to the Blockchain
+    """
     json = request.get_json()  # Put JSON file in Postman
     
     transaction_keys = ['sender', 'receiver', 'amount']
@@ -280,6 +283,9 @@ def add_transaction():
 # Connecting new nodes
 @app.route('/connect_node', methods = ['POST'])
 def connect_node():
+    """
+    Connect a node to the node network
+    """
     json = request.get_json()
     nodes = json.get('nodes')
     
@@ -293,6 +299,9 @@ def connect_node():
     response = {'message': 'All of the nodes are now connected. The RT Blockchain now contains the following nodes: ',
                 'total_nodes': list(blockchain.nodes)}
     return jsonify(response), 201
+
+# Replacing the chain by the longest chain if needed
+
 
 # Running the app
 # host = '0.0.0.0' to make server publicly available
