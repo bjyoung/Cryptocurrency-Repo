@@ -265,6 +265,8 @@ def is_valid():
 def add_transaction():
     """
     Adding a new transaction to the Blockchain
+    
+    :return: JSON object, HTTP response code
     """
     json = request.get_json()  # Put JSON file in Postman
     
@@ -285,6 +287,8 @@ def add_transaction():
 def connect_node():
     """
     Connect a node to the node network
+    
+    :return: JSON object, HTTP response code
     """
     json = request.get_json()
     nodes = json.get('nodes')
@@ -301,7 +305,24 @@ def connect_node():
     return jsonify(response), 201
 
 # Replacing the chain by the longest chain if needed
-
+@app.route('/replace_chain', methods = ['GET'])
+def replace_chain():
+    """
+    Replace the chain, a longer chain has been found
+    
+    :return: JSON object, HTTP response code
+    """
+    is_chain_replaced = blockchain.replace_chain()
+    
+    if is_chain_replaced is False:
+        message = 'The nodes had different chains so the chain was replaced by the longer one.'
+    else:
+        message = 'All good. The chain is the largest one.'
+        
+    response = {'message': message,
+                'chain': blockchain.chain}
+    
+    return jsonify(response), 200
 
 # Running the app
 # host = '0.0.0.0' to make server publicly available
