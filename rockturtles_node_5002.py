@@ -314,7 +314,7 @@ def replace_chain():
     """
     is_chain_replaced = blockchain.replace_chain()
     
-    if is_chain_replaced is False:
+    if is_chain_replaced is True:
         message = 'The nodes had different chains so the chain was replaced by the longer one.'
     else:
         message = 'All good. The chain is the largest one.'
