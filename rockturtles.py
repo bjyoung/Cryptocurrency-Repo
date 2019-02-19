@@ -12,7 +12,7 @@ To be installed:
 import datetime
 import hashlib # To hash blocks
 import json # To encode blocks before hashing
-from flask import Flask, jsonify # Web application portion
+from flask import Flask, jsonify, request # Web application portion
 # New imports
 import requests
 from uuid import uuid4
