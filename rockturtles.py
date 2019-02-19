@@ -153,7 +153,7 @@ class Blockchain:
         :param address: url address to extract
         """
         parsed_url = urlparse(address)  # Use urlib.parse import to parse given url
-        self.nodes.add{parsed_url.netloc}  
+        self.nodes.add(parsed_url.netloc) 
         
     def replace_chain(self):
         """
